@@ -62,7 +62,7 @@ public:
 class creadoraJson{
 public:
     void mostrarVec_double(const vecDT& vec){
-        cout<<"\"vec_doubles\": [";
+        cout<<"\"vec_doubles\" : [";
         for (size_t i=0; i< vec.size(); ++i){
             cout<<vec[i];
             if(i < vec.size() -1){
@@ -73,7 +73,7 @@ public:
         
     }
     void mostrar_pal(const PalabrasDT& pal){
-        cout<<"\"palabras\": [";
+        cout<<"  \"palabras\" : [";
         for (size_t i=0; i< pal.size(); ++i){
             cout<<"\""<<pal[i]<<"\"";
             if(i< pal.size()-1){
@@ -84,15 +84,15 @@ public:
     }
 
     void mostrar_lista(const listasDT& li){
-        cout<<"\"listas\": [\n";
+        cout<<"  \"listas\" : [\n";
         for (size_t i=0; i< li.size();++i){
-            cout <<"[";
+            cout <<"          [";
             cout<< li[i][0]<< "," <<li[i][1];
             cout<< "]";
             if( i!= li.size() -1) cout << ",";
             cout<<"\n";
             }
-        cout<< "]\n";
+        cout<< "         ]\n";
         }
 
     void printJson(const vecDT& vector_double,const PalabrasDT& palabras,const listasDT& lista_int){
@@ -100,7 +100,7 @@ public:
         mostrarVec_double(vector_double);
         mostrar_pal(palabras);
         mostrar_lista(lista_int);
-        cout<<"}";
+        cout<<"}\n";
     }
 };
 
