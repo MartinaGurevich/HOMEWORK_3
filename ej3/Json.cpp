@@ -63,17 +63,24 @@ class creadoraJson{
 public:
     void mostrarVec_double(const vecDT& vec){
         cout<<"\"vec_doubles\": [";
-        for (const auto& v:vec){
-            cout<<v<<",";
-        cout<< "],\n";
+        for (size_t i=0; i< vec.size(); ++i){
+            cout<<vec[i];
+            if(i < vec.size() -1){
+                cout<< ",";
+            }
         }
+        cout<<"],\n";
+        
     }
     void mostrar_pal(const PalabrasDT& pal){
         cout<<"\"palabras\": [";
-        for (const auto& p: pal){
-            cout<<p<<",";
-        cout<< "],\n";
+        for (size_t i=0; i< pal.size(); ++i){
+            cout<<"\""<<pal[i]<<"\"";
+            if(i< pal.size()-1){
+                cout<< ", ";
+            }
         }
+        cout<< "],\n";
     }
 
     void mostrar_lista(const listasDT& li){
@@ -82,13 +89,14 @@ public:
             cout <<"[";
             cout<< li[i][0]<< "," <<li[i][1];
             cout<< "]";
-            if( i!= li.size() -1) cout << ","<<endl;
+            if( i!= li.size() -1) cout << ",";
+            cout<<"\n";
             }
         cout<< "]\n";
         }
 
     void printJson(const vecDT& vector_double,const PalabrasDT& palabras,const listasDT& lista_int){
-        cout<<"{";
+        cout<<"{ ";
         mostrarVec_double(vector_double);
         mostrar_pal(palabras);
         mostrar_lista(lista_int);
@@ -100,8 +108,8 @@ public:
 int main(){
     creadoraJson print;
     //defino vec
-    vecDT vect_double{1.3,2.1,3.1};
-    PalabrasDT pal{"Hola", "Mundo"};
+    vecDT vect_double{1.3,2.1,3.2};
+    PalabrasDT pal{"Hola","Mundo"};
     listasDT enteros;
     enteros={
         {1,2},
