@@ -14,7 +14,7 @@ template<typename T>
 class generadora {
 public:
     void construir_Json(const T& tipo){
-        cout<<"guardar un vector de tipo no definido"<<endl;
+        cout<<"guardar un vector de tipo no definido"<<endl; //contaruir tod en esta sola clase con constexpr 
     }
 };
 
