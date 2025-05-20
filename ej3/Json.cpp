@@ -8,90 +8,93 @@ using vecDT= vector<double>;
 using PalabrasDT= vector<string>;
 using listasDT=  vector<vector<int>>; 
 
+//hago una clase base para usar polimorfismo con la clase 2. Como en la clase 1, T varia , no puedo guardar sus objetos 
+class GeneradoraBase
+{
+public:
+    virtual void construir_Json(const string& etiqueta) const = 0;
+    virtual ~GeneradoraBase()= default;
+};
+
 //CLASE 1
 //generic template
 template<typename T>
-class generadora {
-public:
-    void construir_Json(const T& tipo){
-        cout<<"guardar un vector de tipo no definido"<<endl; //contaruir tod en esta sola clase con constexpr 
-    }
-};
+class generadora: public GeneradoraBase {
+private: 
+    T datos;
 
-template<>
-class generadora<vecDT>{
 public:
-    void construir_Json(const vecDT& vec){
-        if constexpr(is_same_v<typename vecDT:: value_type,double>){
-            cout<<"Es un double"<<endl;
-        } else{
-            cout<<"No es un double"<<endl;
+
+    void agregar(const T& entradas){
+        datos= entradas;
+    }
+
+    void construir_Json(const string& etiqueta)const override {
+        if constexpr(is_same_v<T, vecDT>){
+            cout<<"\""<<etiqueta<<"\" : [";
+            for (size_t i=0; i< datos.size(); ++i){
+                cout<<datos[i];
+                if(i < datos.size() -1){
+                    cout<< ",";
+            }
         }
-
-    }
-};
-
-template<>
-class generadora<PalabrasDT>{
-public:
-    void construir_Json(const PalabrasDT& pal){
-        if constexpr(is_same_v<typename PalabrasDT:: value_type,string>){
-            cout<<"Es un vector de string"<<endl;
-        } else{
-            cout<<"No es un vector de string"<<endl;
         }
-
-    }
-};
-
-
-template<>
-class generadora<listasDT>{
-public:
-    void construir_Json(const listasDT& li){
-        if constexpr(is_integral_v<typename listasDT::value_type::value_type>){
-            cout<<"Es un vector de enteros"<<endl;
-        } else{
-            cout<<"No es un vector de enteros"<<endl;
+        else if constexpr(is_same_v<T, PalabrasDT>){
+        
+            for (size_t i=0; i< datos.size(); ++i){
+                cout<<"\""<<datos[i]<<"\"";
+                if(i< datos.size()-1){
+                    cout<< ", ";
+            }
+        }
+        }
+        else if constexpr(is_integral_v<T, listasDT>){
+        
+            for (size_t i=0; i< datos.size();++i){
+                cout <<"          [";
+                cout<< datos[i][0]<< "," <<datos[i][1];
+                cout<< "]";
+                if( i!= datos.size() -1) cout << ",";
+                cout<<"\n";
+            }
+        } 
+        else{
+            cout<<"guardar un vector de tipo no definido"<<endl;
         }
 
     }
 };
 
 //CLASE 2
-class creadoraJson{
+class creadoraJson {
 public:
     void mostrarVec_double(const vecDT& vec){
         cout<<"\"vec_doubles\" : [";
-        for (size_t i=0; i< vec.size(); ++i){
-            cout<<vec[i];
-            if(i < vec.size() -1){
-                cout<< ",";
-            }
-        }
+
+        // for (size_t i=0; i< vec.size(); ++i){
+        //     cout<<vec[i];
+        //     if(i < vec.size() -1){
+        //         cout<< ",";
+        //     }
+        // }
         cout<<"],\n";
         
     }
     void mostrar_pal(const PalabrasDT& pal){
         cout<<"  \"palabras\" : [";
-        for (size_t i=0; i< pal.size(); ++i){
-            cout<<"\""<<pal[i]<<"\"";
-            if(i< pal.size()-1){
-                cout<< ", ";
-            }
-        }
+  
         cout<< "],\n";
     }
 
     void mostrar_lista(const listasDT& li){
         cout<<"  \"listas\" : [\n";
-        for (size_t i=0; i< li.size();++i){
-            cout <<"          [";
-            cout<< li[i][0]<< "," <<li[i][1];
-            cout<< "]";
-            if( i!= li.size() -1) cout << ",";
-            cout<<"\n";
-            }
+        // for (size_t i=0; i< li.size();++i){
+        //     cout <<"          [";
+        //     cout<< li[i][0]<< "," <<li[i][1];
+        //     cout<< "]";
+        //     if( i!= li.size() -1) cout << ",";
+        //     cout<<"\n";
+        //     }
         cout<< "         ]\n";
         }
 
