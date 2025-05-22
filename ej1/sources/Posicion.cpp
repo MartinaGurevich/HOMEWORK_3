@@ -1,10 +1,8 @@
 #include "Posicion.hpp"
 
-Posicion::Posicion(float lat, float lon, float alt, float t):latitud(lat), longitud(lon),altitud(alt),
-MedicionBase(t){};
+Posicion::Posicion(float latitud, float longitud, float altitud, float t):MedicionBase(t), latitud(latitud), longitud(longitud),altitud(altitud){};
 
-Posicion::Posicion( const Posicion& rht):latitud(rht.latitud), longitud(rht.longitud),altitud(rht.altitud),
-MedicionBase(rht){}; //copio constr
+Posicion::Posicion( const Posicion& rht):MedicionBase(rht), latitud(rht.latitud), longitud(rht.longitud),altitud(rht.altitud){}; //copio constr
 
 void Posicion:: serializar(ofstream& out) const{
     MedicionBase::serializar(out); //tiempo
@@ -21,6 +19,7 @@ void Posicion:: deserializar(ifstream& in) {
 }
 
 void Posicion:: imprimir(){
+    cout<<"------------------POSICION------------------------\n";
     cout<<"--> LATITUD: "<<latitud<<endl;
     cout<<"--> LONGITUD: "<<longitud<<endl;
     cout<<"--> ALTITUD: "<<altitud<<endl;

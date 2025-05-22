@@ -15,7 +15,7 @@ public:
     void deserializar (ifstream& in);
     void imprimir();
 
-    ~SaveFlightData();
+    ~SaveFlightData()=default;
 };
 
 

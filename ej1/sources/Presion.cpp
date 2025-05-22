@@ -17,7 +17,7 @@ void Presion:: deserializar(ifstream& in) {
 }
 
 void Presion:: imprimir(){
-    cout<<"--PRESION--"<<endl;
+    cout<<"------------------PRESIÓN------------------------"<<endl;
     cout<<"--> PRESIÓN ESTÁTICA: "<<presionEstatica<<endl;
     cout<<"--> PRESIÓN DINÁMICA: "<<presionDinamica<<endl;
     cout<<"--> TIEMPO DE MEDICION: "<<getTiempo()<<endl;
