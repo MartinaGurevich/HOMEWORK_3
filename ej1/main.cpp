@@ -32,3 +32,8 @@ int main (){
     return 0;
     
 }
+
+
+/*
+preguntar: 
+si esta bien lo de los constructores de copia y si esta bien usar save flight data con la copia esta*/

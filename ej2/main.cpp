@@ -20,3 +20,5 @@ int main(){
     cout << "Area de Rectángulo: "<< areaR.calcularArea(rect)<< endl;
 }
 
+
+/*preg :  si esta bien en la forma que hago el tenplate , para como se elige cada area ... yo lo pongo " manual " pero no se si esta bien asi */

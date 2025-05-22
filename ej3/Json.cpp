@@ -105,4 +105,5 @@ int main(){
     creador.printJson();
 }
 
+/* tmbien meto print en clase 1 , bhice uan especie de polimorfismo esta bien ? porque sino no podia tomar herencia de la clase 1 porque es unaa calse template  */
 
