@@ -34,7 +34,10 @@ public:
 
 template<>
 class ProcesadorFigura<Elipse>{
+private: 
+    Elipse elip;
 public:
+    ProcesadorFigura(const Elipse& elipse): elip(elipse);
     float calcularArea(const Elipse& elip){
         return M_PI* elip.Get_Elip_a() * elip.Get_Elip_b();
     }
