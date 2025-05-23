@@ -37,16 +37,19 @@ class ProcesadorFigura<Elipse>{
 private: 
     Elipse elip;
 public:
-    ProcesadorFigura(const Elipse& elipse): elip(elipse);
-    float calcularArea(const Elipse& elip){
+    ProcesadorFigura(const Elipse& elipse): elip(elipse){};
+    float calcularArea(){
         return M_PI* elip.Get_Elip_a() * elip.Get_Elip_b();
     }
 };
 
 template<>
 class ProcesadorFigura<Rectángulo>{
+private: 
+    Rectángulo rect;
 public:
-    float calcularArea(const Rectángulo& rect){
+    ProcesadorFigura(const Rectángulo& rectangulo): rect(rectangulo) {};
+    float calcularArea(){
         return rect.Get_Rect_ancho()* rect.Get_Rect_largo();
     }
 };

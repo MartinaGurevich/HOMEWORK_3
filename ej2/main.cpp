@@ -11,13 +11,13 @@ int main(){
 
     ProcesadorFigura<punto> areaP(P);
     ProcesadorFigura<circulo> areaC(circ);
-    ProcesadorFigura<Elipse> areaE;
-    ProcesadorFigura<Rectángulo> areaR;
+    ProcesadorFigura<Elipse> areaE(eli);
+    ProcesadorFigura<Rectángulo> areaR(rect);
 
     cout << "Area de un punto: "<< areaP.calcularArea()<< endl;
     cout << "Area de Circulo: "<< areaC.calcularArea()<< endl;
-    cout << "Area de Elipse: "<< areaE.calcularArea(eli)<< endl;
-    cout << "Area de Rectángulo: "<< areaR.calcularArea(rect)<< endl;
+    cout << "Area de Elipse: "<< areaE.calcularArea()<< endl;
+    cout << "Area de Rectángulo: "<< areaR.calcularArea()<< endl;
 }
 
 
