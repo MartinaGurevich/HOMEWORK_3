@@ -10,9 +10,12 @@ using namespace std;
 
 template <typename T> //aca va a entrar circulo 
 class ProcesadorFigura{
+private:
+    T figura; //va a enytrar punto
 
 public:
-    float calcularArea(const T& figura){
+    ProcesadorFigura(const T& figura): figura(figura){};
+    float calcularArea(){
         cout<<"no se puede calcular este area, esta es:";
         return 0.0f; //area nula
     }
@@ -20,8 +23,11 @@ public:
 
 template<>
 class ProcesadorFigura<circulo>{
+private: 
+    circulo circ;
 public:
-    float calcularArea(const circulo& circ){
+    ProcesadorFigura(const circulo& circulo): circ (circulo){};
+    float calcularArea(){
         return  M_PI * circ.Get_Circle_R();
     }
 };

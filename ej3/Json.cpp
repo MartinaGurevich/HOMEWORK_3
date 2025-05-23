@@ -19,10 +19,11 @@ public:
 
 //CLASE 1
 //generic template
-template<typename T>
+template<typename T> //deberia tener un vector aca que le meta los tipos T , y en l¿clase dos hago agregacion de los vectores 
 class generadora: public GeneradoraBase {
 private: 
     T datos;
+
 public:
 
     void agregar(const T& entradas){
@@ -73,7 +74,7 @@ public:
 };
 
 //CLASE 2
-class creadoraJson {
+class creadoraJson { //se pasa como atributo private la clase 1 y ahi se llama y se concatena con la etiqueta correspondiente 
 private:
     vector<pair< string, shared_ptr<GeneradoraBase>>> vect;
 public:
@@ -82,7 +83,7 @@ public:
         auto gen= make_shared<generadora<T>>(); //me creo obj de clase gen
         gen->agregar(datos);
         vect.push_back({etiqueta, gen}); 
-    }
+    } //NO VA VA EN CLASE 1 
 
     void printJson(){
         cout<<"{";
@@ -96,7 +97,7 @@ public:
 
 
 int main(){
-    creadoraJson creador;
+    creadoraJson creador; //deberia poner un obj de la clase 1 y llamar a agregar y vopy agregando con 1.3 otro 2.1 , 3.2
     
     creador.agregar_vect("vec_doubles", vecDT{1.3, 2.1, 3.2});
     creador.agregar_vect("palabras", PalabrasDT{"Hola", "Mundo"});
