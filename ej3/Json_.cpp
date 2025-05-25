@@ -1,17 +1,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <memory>
+#include <sstream>
 using namespace std;
 
-//defino tipos de datos 
-// using vecDT= vector<double>;
-using paso_aString= vector<string>;
-// using listasDT=  vector<vector<int>>;
-
 //CLASE 1
-//generic template
-template<typename T> //deberia tener un vector aca que le meta los tipos T , y en l¿clase dos hago agregacion de los vectores 
+template<typename T> 
 class generadora {
 private: 
     vector<T> vect_tipo; //vector que se va llenando 
@@ -21,69 +15,103 @@ public:
         vect_tipo.push_back(dato);
     }
 
-    void construir_Json(const string& etiqueta)const {
-        if constexpr(is_same_v<T, vecDT>){
-            /*cout<<" \""<<etiqueta<<"\*/" :  [";
-            for (size_t i=0; i< vect_tipo.size(); i++){
-                cout<<vect_tipo[i];
-                if( i!= vect_tipo.size() -1) {cout << ", ";}
-                else{cout<<"],\n";
-                }
 
-            //";
-        }
-        }
-        else if constexpr(is_same_v<T, PalabrasDT>){
-            /*cout<<"  \""<<etiqueta<<"\*/ " : [";
-            for (size_t i=0; i< datos.size(); ++i){
-                cout<<"\""<<datos[i]<<"\"";
-                if(i< datos.size()-1){
-                    cout<< ",";
-                }else{
-                    cout<<"],\n";
-                } 
-        }
-        }
-        else if constexpr(is_same_v<T, listasDT>){
-            
-            /*cout<<"  \""<<etiqueta<<"\*/" :[\n";
-            for (size_t i=0; i< datos.size();++i){
-                cout <<"          [";
-                cout<< datos[i][0]<< "," <<datos[i][1];
-                cout<< "]";
-                if( i!= datos.size() -1) cout << ",";
-                cout<<"\n";
+    string construir_Json() const { //convierte vec a str
+       ostringstream pasaje;
+
+        if constexpr(is_same_v<T, double>){
+            pasaje <<"[";
+            for (size_t i=0; i< vect_tipo.size(); ++i){
+                pasaje <<vect_tipo[i];
+                if( i < vect_tipo.size() -1) pasaje<<", ";
             }
-            cout<< "         ]\n";
-        } 
-        else{
-            cout<<"guardar un vector de tipo no definido"<<endl;
+            pasaje <<"]"; 
+        }
+        else if constexpr(is_same_v<T, string>){
+            pasaje<<"[";
+            for (size_t i=0; i< vect_tipo.size(); ++i){
+                pasaje<<"\""<<vect_tipo[i]<<"\"";
+                if(i< vect_tipo.size()-1) pasaje<< ",";  
+            } 
+            pasaje<<"]";
         }
 
-    }
+        else if constexpr(is_same_v<T, vector<int>>){
+            pasaje<<"[\n";
+            for (size_t i=0; i< vect_tipo.size();++i){
+                pasaje <<"           [";
+                for (size_t j=0; j< vect_tipo[i].size();++j){
+                    pasaje<< vect_tipo[i][j];
+                    if( j < vect_tipo.size() -1) pasaje << ",";
+                }
+                pasaje<<"]";
+                if( i < vect_tipo.size() -1) pasaje << ",";
+                pasaje<<"\n";
+            }
+
+            pasaje<< "           ]\n";
+        }
+
+        return pasaje.str();
+    } 
 };
 
 //CLASE 2
-template<typename T>
 class creadoraJson { //se pasa como atributo private la clase 1 y ahi se llama y se concatena con la etiqueta correspondiente 
 private:
-
-    generadora crear;
-
+    vector<string> etiquetas;
+    vector<string> contenidos;
 public:
-    template<typename T>
-    void agregar_vect(const string& etiqueta,const T& datos){
-        auto gen= make_shared<generadora<T>>(); //me creo obj de clase gen
-        gen->agregar(datos);
-        vect.push_back({etiqueta, gen}); 
-    } //NO VA VA EN CLASE 1 
+    template <typename T>
+    void unir(const string& etiqueta, const generadora<T>& elem){
+        etiquetas.push_back(etiqueta);
+        contenidos.push_back(elem.construir_Json());
 
-    void printJson(){
+    }
+
+    void printJson()const {
         cout<<"{";
-        for(size_t i=0; i< vect.size(); ++i){
-            vect[i].second->construir_Json(vect[i].first); //dereferencio para entrar al derivado de la base
+        for(size_t i=0; i< etiquetas.size(); ++i){
+            cout<<" ";
+            cout<< "  \""<<etiquetas[i]<<"\":"<< contenidos[i]; 
+            if(i < etiquetas.size()-1) cout<< ",";
+            cout<<"\n";
         }
+       
         cout<<"}\n";
     }
 
 };
+
+int main(){
+    
+    //vector de doubles
+    generadora <double> vectorD;
+    vectorD.agregar({1.3});
+    vectorD.agregar({2.1});
+    vectorD.agregar({3.2});
+    //vector de str
+    generadora <string> vectorS;
+    vectorS.agregar({"Hola"});
+    vectorS.agregar({"Mundo"});
+    //lista de vector de ints
+    generadora <vector<int>> vectorL;
+    vectorL.agregar({1,2});
+    vectorL.agregar({3,4});
+
+    //creo json
+    creadoraJson crear;
+    crear.unir("vec_doubles",vectorD);
+    crear.unir("palabras",vectorS);
+    crear.unir("listas",vectorL);
+
+    crear.printJson();
+
+    return 0;
+
+
+
+
+
+
+}
