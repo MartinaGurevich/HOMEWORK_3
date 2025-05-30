@@ -8,10 +8,10 @@
 
 using namespace std;
 
-template <typename T> //aca va a entrar circulo 
+template <typename T>  
 class ProcesadorFigura{
 private:
-    T figura; //va a enytrar punto
+    T figura; //va a entrar punto
 
 public:
     ProcesadorFigura(const T& figura): figura(figura){};

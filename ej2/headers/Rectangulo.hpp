@@ -4,7 +4,7 @@
 class Rectángulo
 {
 private:
-    //pos de su vert izq inferior
+    //pos de su vertice izq inferior
     float vertice_posx;
     float vertice_posy;
     float ancho;

@@ -15,5 +15,5 @@ void MedicionBase:: deserializar(ifstream& in){
 }
 
 float MedicionBase:: getTiempo(){
-    return *tiempoMedicion; //dereferenciacion de puntero 
+    return *tiempoMedicion; //desreferenciacion de puntero 
 }

@@ -2,8 +2,6 @@
 
 Presion:: Presion(float p, float q, float t): MedicionBase(t),presionEstatica(p), presionDinamica(q){};
 
-Presion:: Presion(const Presion& rht):  MedicionBase(rht),presionEstatica(rht.presionEstatica), presionDinamica(rht.presionDinamica){};
-
 void Presion:: serializar(ofstream& out) const{
     MedicionBase::serializar(out); //tiempo
     out.write(reinterpret_cast<const char*>(&presionEstatica), sizeof(presionEstatica));

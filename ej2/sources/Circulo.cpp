@@ -21,5 +21,5 @@ float circulo:: Get_Circle_y() const{
 }
 
 float circulo:: Get_Circle_R() const{
-    return radio* radio;
+    return radio*radio;
 }

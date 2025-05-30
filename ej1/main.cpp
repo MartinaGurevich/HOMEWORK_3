@@ -8,8 +8,6 @@ int main (){
     Posicion posicion(-34.6f, -58.4f, 950.0f, 5.3);
     Presion presion(101.3f, 5.8f, 6.1f);
 
-    // posicion.imprimir();
-    // presion.imprimir();
 
     SaveFlightData data(posicion,presion);
     
@@ -28,12 +26,10 @@ int main (){
         copy.deserializar(in);
         in.close();}
 
+    cout<<"\n";
+    cout<<"Deserializacion de datos: \n";
     copy.imprimir();
     return 0;
     
 }
 
-
-/*
-preguntar: 
-si esta bien lo de los constructores de copia y si esta bien usar save flight data con la copia esta*/

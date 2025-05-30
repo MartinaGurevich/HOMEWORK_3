@@ -11,7 +11,7 @@ public:
 
     void serializar( ofstream& out)const ;
     void deserializar(ifstream& in) ;
-    Presion(const Presion& rht);
+    
     Presion(float p, float q, float t);
     ~Presion()= default ;
 };

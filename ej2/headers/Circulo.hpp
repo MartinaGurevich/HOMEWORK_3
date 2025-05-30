@@ -8,7 +8,7 @@ private:
     float x;
     float y;
 public:
-    circulo( float radio, float x, float y);
+    circulo(float radio, float x, float y);
 
     //Setter
     void SetCircle_x(float nuevo_x);

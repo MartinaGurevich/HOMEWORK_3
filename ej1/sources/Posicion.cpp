@@ -2,8 +2,6 @@
 
 Posicion::Posicion(float latitud, float longitud, float altitud, float t):MedicionBase(t), latitud(latitud), longitud(longitud),altitud(altitud){};
 
-Posicion::Posicion( const Posicion& rht):MedicionBase(rht), latitud(rht.latitud), longitud(rht.longitud),altitud(rht.altitud){}; //copio constr
-
 void Posicion:: serializar(ofstream& out) const{
     MedicionBase::serializar(out); //tiempo
     out.write(reinterpret_cast<const char*>(&latitud), sizeof(latitud));

@@ -16,7 +16,7 @@ public:
     }
 
 
-    string construir_Json() const { //convierte vec a str
+    string construir_Json() const { //funcion que convierte vec a str
        ostringstream pasaje;
 
         if constexpr(is_same_v<T, double>){
@@ -57,13 +57,13 @@ public:
 };
 
 //CLASE 2
-class creadoraJson { //se pasa como atributo private la clase 1 y ahi se llama y se concatena con la etiqueta correspondiente 
+class creadoraJson { 
 private:
     vector<string> etiquetas;
     vector<string> contenidos;
 public:
     template <typename T>
-    void unir(const string& etiqueta, const generadora<T>& elem){
+    void unir(const string& etiqueta, const generadora<T>& elem){ //segundo argumento es objeto de la clase 1, se pasa en el main para unir etiqueta con vector
         etiquetas.push_back(etiqueta);
         contenidos.push_back(elem.construir_Json());
 
@@ -108,10 +108,4 @@ int main(){
     crear.printJson();
 
     return 0;
-
-
-
-
-
-
 }
